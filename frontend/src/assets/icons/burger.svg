@@ -1,0 +1,19 @@
+<svg width="44" height="42" viewBox="0 0 44 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Hamburger">
+<rect id="Rectangle 3" x="1" y="1" width="42" height="40" rx="15" fill="url(#paint0_linear_4_5)" stroke="url(#paint1_linear_4_5)" stroke-width="2"/>
+<circle id="Ellipse 1" cx="18" cy="15" r="3" fill="#4D515A"/>
+<circle id="Ellipse 2" cx="27" cy="15" r="3" fill="#4D515A"/>
+<circle id="Ellipse 3" cx="27" cy="27" r="3" fill="#4D515A"/>
+<circle id="Ellipse 4" cx="18" cy="27" r="3" fill="#4D515A"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_4_5" x1="5" y1="2.40547e-07" x2="35" y2="42" gradientUnits="userSpaceOnUse">
+<stop stop-color="#222931"/>
+<stop offset="1" stop-color="#11141B"/>
+</linearGradient>
+<linearGradient id="paint1_linear_4_5" x1="0" y1="0" x2="39" y2="42" gradientUnits="userSpaceOnUse">
+<stop stop-color="#232732"/>
+<stop offset="1" stop-color="#0E1118"/>
+</linearGradient>
+</defs>
+</svg>

@@ -1,0 +1,192 @@
+openapi: 3.0.3
+info:
+  version: '0.1.0'
+  title: 'Coffee API'
+servers:
+  - url: 'http://localhost:5000'
+paths:
+  /coffee-drinks:
+    get:
+      summary: 'List Coffee Drinks'
+      description: 'Returns a list of `Coffe Drink` objects.'
+      operationId: listCoffeeDrinks
+      tags:
+        - Coffee Drinks
+      responses:
+        '200':
+          description: 'List of `coffee drinks`'
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CoffeeDrink'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /coffee-drinks/{id}:
+    get:
+      summary: 'Retrieve a Coffee Drink'
+      description: 'Retrieves a single `Coffee Drink` object. It has details about a particular coffee drink.'
+      operationId: retrieveCoffeeDrink
+      tags:
+        - Coffee Drinks
+      parameters:
+        - name: id
+          in: path
+          description: ID of the coffee drink
+          required: true
+          schema:
+            type: integer
+            format: int32
+            example:
+              - 1
+      responses:
+        '200':
+          description: 'Details about a specific `Coffee Drink`'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CoffeeDrink'
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    CoffeeDrink:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        category:
+          type: string
+          description: the type of coffee drink (e.g. "espressos", "cappuccinos", etc.)
+        formCode:
+          $ref: "#/components/schemas/FormCode"
+          description: how the drink will be served (i.e. the form)
+        displayOrder:
+          type: integer
+          description: the drink's relative placement in the catalog (lower number means higher up on the list)
+        availability:
+          $ref: "#/components/schemas/Availability"
+        assets:
+          $ref: "#/components/schemas/Assets"
+        sizes:
+          type: array
+          items:
+            $ref: "#/components/schemas/Size"
+      required:
+        - id
+        - assets
+        - availability
+        - displayOrder
+        - formCode
+        - name
+        - category
+        - sizes
+      title: Coffee Drink
+    Assets:
+      type: object
+      additionalProperties: false
+      properties:
+        thumbnail:
+          $ref: "#/components/schemas/Thumbnail"
+        fullSize:
+          $ref: "#/components/schemas/FullSize"
+        masterImage:
+          $ref: "#/components/schemas/FullSize"
+      required:
+        - fullSize
+        - masterImage
+        - thumbnail
+      title: Assets
+    FullSize:
+      type: object
+      additionalProperties: false
+      properties:
+        uri:
+          type: string
+          format: uri
+      required:
+        - uri
+      title: FullSize
+    Thumbnail:
+      type: object
+      additionalProperties: false
+      properties:
+        large:
+          $ref: "#/components/schemas/FullSize"
+      required:
+        - large
+      title: Thumbnail
+    Size:
+      type: array
+      additionalProperties: false
+      items:
+        $ref: "#/components/schemas/SizeCode"
+      title: Size
+    Availability:
+      type: string
+      enum:
+        - Available
+      title: Availability
+    FormCode:
+      type: string
+      enum:
+        - Single
+        - Hot
+        - Iced
+        - Packaged
+        - Whole-Bean
+        - VIA
+      title: FormCode
+    SizeCode:
+      type: string
+      enum:
+        - Small
+        - Medium
+        - Large
+        - Single
+        - Double
+        - Triple
+        - Quad
+        - Kids
+        - Trenta
+        - 14.5-Packaged
+        - 12-Packaged
+        - 11-Packaged
+        - 8-Packaged
+        - 16.9-Packaged
+        - 20-Packaged
+        - 23.7-Packaged
+        - 600-Packaged
+        - 1 Piece
+        - 8.8-oz
+        - 1-lb
+        - 5-count
+        - 12-count
+      title: SizeCode
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          example:
+            - 500
+        message:
+          type: string
+          example:
+            - Something went wrong
